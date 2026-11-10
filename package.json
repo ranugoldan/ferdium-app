@@ -126,6 +126,7 @@
     "sanitize-filename": "1.6.3",
     "semver": "7.6.3",
     "sqlite3": "5.1.6",
+    "string-width": "4.2.3",
     "tar": "6.2.1",
     "tinycolor2": "1.6.0",
     "tslib": "2.7.0",

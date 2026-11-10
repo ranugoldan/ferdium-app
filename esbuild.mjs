@@ -73,6 +73,23 @@ const copyManualAssets = () => {
     gitBranch: buildInfo.gitBranch,
   };
   fsPkg.outputJsonSync(`${outDir}/buildInfo.json`, buildInfoData);
+
+  // Ensure string-width and its dependencies are bundled into app.asar for wide-align / @mapbox/node-pre-gyp / sqlite3
+  const modulesToCopy = [
+    'string-width@4.2.3/node_modules/string-width',
+    'strip-ansi@6.0.1/node_modules/strip-ansi',
+    'ansi-regex@5.0.1/node_modules/ansi-regex',
+    'is-fullwidth-code-point@3.0.0/node_modules/is-fullwidth-code-point',
+    'emoji-regex@8.0.0/node_modules/emoji-regex',
+  ];
+  for (const mod of modulesToCopy) {
+    const pkgName = mod.split('/').pop();
+    const src = `node_modules/.pnpm/${mod}`;
+    const dest = `${outDir}/node_modules/${pkgName}`;
+    if (fs.existsSync(src)) {
+      fsPkg.copySync(src, dest, { dereference: true });
+    }
+  }
 };
 
 const runEsbuild = async () => {

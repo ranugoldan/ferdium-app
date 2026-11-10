@@ -41,7 +41,7 @@ import { ifUndefined } from './jsUtils';
 import Settings from './electron/Settings';
 import handleDeepLink, { getDeepLinkFromArgs } from './electron/deepLinking';
 import './electron/exception';
-// eslint-disable-next-line import/no-cycle
+
 import ipcApi from './electron/ipc-api';
 import { popupWindowOptions } from './electron/popupWindowOptions';
 import isPositionValid from './electron/windowUtils';
